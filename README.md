@@ -4,4 +4,4 @@
 
 ## 📝 GitHub Discussions
 
-- [NUMA Architecture Discussion](numa.md) - Performance optimization insights
+- [NUMA Architecture Discussion](https://github.com/dheeraj-sn/interesting-reads/discussions/2) - Performance optimization insights
