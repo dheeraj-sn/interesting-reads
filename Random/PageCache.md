@@ -60,30 +60,12 @@ It's important to distinguish between the page cache and swap space:
 
 ### Kernel Tunables
 
-In Linux, you can influence the page cache's write-back behavior via `sysctl` parameters like `vm.dirty_background_ratio` and `vm.dirty_ratio`. Tuning these can be critical for write-heavy applications to avoid I/O stalls.
+In Linux, you can influence the page cache's write-back behavior via `sysctl` parameters:
 
-## Advanced Concepts for the Curious Engineer
+*   `vm.dirty_background_ratio`: This is the percentage of total system memory that can be filled with dirty pages before a background kernel process (like `pdflush` or `bdi-flush`) starts writing them to disk. This is a soft limit, and the flushing happens in the background, aiming to keep the dirty pages below this threshold.
+*   `vm.dirty_ratio`: This is the absolute maximum percentage of total system memory that can be filled with dirty pages. Once this threshold is reached, any process attempting to write data will be blocked until enough dirty pages have been written to disk to bring the total dirty memory below this limit. This is a hard limit and can lead to significant I/O stalls if hit frequently.
 
-Beyond the basics, several other aspects of the page cache are crucial for a senior engineer to understand.
-
-### Cache Eviction: Beyond Simple LRU
-
-When the system runs low on memory, it must evict pages from the cache. A simple Least Recently Used (LRU) policy would be problematic—a single large file scan could pollute the entire cache. To prevent this, modern kernels like Linux use a more sophisticated **two-list strategy**, maintaining separate "active" and "inactive" lists. This ensures that frequently used "hot" pages are protected from being evicted by infrequent, large reads.
-
-### Memory-Mapped Files (`mmap`)
-
-The `mmap()` system call is a high-performance I/O mechanism that maps a file directly to a region of the application's virtual address space. When you use `mmap`, you are **directly interacting with the page cache**. Reading from or writing to the mapped memory region is equivalent to reading from or writing to the page cache. This avoids the extra data copy required by `read()` and `write()`, making it a favorite of high-performance data systems.
-
-### Page Cache vs. Swap Space
-
-It's important to distinguish between the page cache and swap space:
-
-*   **Page Cache:** Caches **file-backed** pages. This data has a permanent home on disk, so a clean page can be dropped without being written anywhere first.
-*   **Swap Space:** Caches **anonymous** pages (e.g., heap and stack memory). This data has no other backing store, so it *must* be written to the swap file on disk before the memory can be reclaimed.
-
-### Kernel Tunables
-
-In Linux, you can influence the page cache's write-back behavior via `sysctl` parameters like `vm.dirty_background_ratio` and `vm.dirty_ratio`. Tuning these can be critical for write-heavy applications to avoid I/O stalls.
+Tuning these parameters can be critical for write-heavy applications to balance performance (by delaying writes) and data integrity (by ensuring writes eventually hit disk) while avoiding I/O stalls.
 
 ## Observing the Page Cache
 
