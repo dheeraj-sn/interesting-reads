@@ -4,6 +4,7 @@
 
 ### Research & Analysis
 - [Google's NUMA Optimization](Papers/OptimizingGooglesWarehouseScaleComputers.md) - Analysis of Google's warehouse-scale computer research
+- [Kafka: a Distributed Messaging System for Log Processing](Papers/Kafka.md)
 
 ### Operating System Fundamentals
 - [System Calls](Random/SystemCalls.md) - User-space to kernel communication
