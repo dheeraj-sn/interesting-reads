@@ -46,9 +46,38 @@ When a page fault occurs, the OS takes over:
 4.  It updates the page table to reflect the new mapping.
 5.  It resumes the program from the instruction that caused the fault.
 
-## Multi-Level Page Tables
+## Multi-Level Page Tables: Paging the Page Table
 
-For a 64-bit system with a large virtual address space, a single page table can be very large. To solve this problem, modern systems use **multi-level page tables**. In this scheme, the page table itself is paged.
+On a 64-bit system, a virtual address space can be enormous (2^64 bytes). A single-level page table for such a large address space would be impractically large. For example, with a 4KB page size, a 64-bit address space would require a page table with 2^52 entries. This would consume a massive amount of memory.
+
+To solve this problem, modern operating systems use **multi-level page tables**. The basic idea is to page the page table itself. Instead of having one large page table, we have a hierarchy of page tables.
+
+### How it Works
+
+In a two-level scheme, the virtual address is divided into three parts:
+
+1.  **Page Directory Index:** An index into the top-level page table (the page directory).
+2.  **Page Table Index:** An index into a second-level page table.
+3.  **Offset:** The offset within the page.
+
+The address translation process now has an extra step:
+
+1.  The MMU uses the page directory index to find the address of the second-level page table in the page directory.
+2.  The MMU uses the page table index to find the frame number in the second-level page table.
+3.  The frame number is combined with the offset to form the physical address.
+
+This scheme can be extended to three, four, or even more levels. For example, the x86-64 architecture uses a four-level page table.
+
+### Advantages of Multi-Level Page Tables
+
+*   **Reduced Memory Overhead:** Multi-level page tables save a significant amount of memory. We only need to allocate second-level page tables for the virtual address ranges that are actually in use.
+*   **Flexibility:** They provide a flexible way to manage a large virtual address space.
+
+### Disadvantages of Multi-Level Page Tables
+
+*   **Increased Complexity:** The address translation process is more complex.
+*   **Performance Overhead:** Each memory access now requires multiple memory lookups. This is why the TLB is so important.
+
 
 ## Conclusion
 
