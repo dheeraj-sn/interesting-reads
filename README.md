@@ -2,6 +2,9 @@
 
 ## 📚 Articles
 
+### Research & Analysis
+- [Google's NUMA Optimization](Papers/OptimizingGooglesWarehouseScaleComputers.md) - Analysis of Google's warehouse-scale computer research
+
 ### Operating System Fundamentals
 - [System Calls](Random/SystemCalls.md) - User-space to kernel communication
 - [Processes and Concurrency](Random/ProcessesAndConcurrency.md) - Processes, threads, and synchronization
@@ -14,9 +17,6 @@
 - [Stack vs Heap](Random/StackAndHeap.md) - Memory allocation and Go's escape analysis
 - [Paging](Random/Paging.md) - Pages, frames, page tables, TLB
 - [Page Cache](Random/PageCache.md) - OS caching and I/O performance
-
-### Research & Analysis
-- [Google's NUMA Optimization](Papers/OptimizingGooglesWarehouseScaleComputers.md) - Analysis of Google's warehouse-scale computer research
 
 ### Community Discussions
 - [NUMA Discussion](Discussions/numa.md) - Community discussion on NUMA architecture
