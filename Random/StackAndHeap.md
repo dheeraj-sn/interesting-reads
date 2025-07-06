@@ -1,8 +1,6 @@
 # Stack vs. Heap: A Developer's Guide to Memory Allocation
 
-In our [previous article](./OSMemoryManagement.md), we discussed the fundamentals of OS memory management. Now, we'll take a deeper dive into two of the most important concepts in memory management: the stack and the heap.
-
-Understanding the difference between the stack and the heap is critical for writing efficient, performant, and bug-free code. It impacts how you design your data structures, how you think about performance, and how you debug your code.
+To understand memory allocation, it's important to know about the stack and the heap. This article takes a deep dive into these two fundamental concepts. By the end, you'll have a solid understanding of how they work, when to use them, and how they impact your code.
 
 ## The Stack: Fast, Ordered, and Automatic
 
@@ -98,3 +96,5 @@ As a backend engineer, understanding the trade-offs between the stack and the he
 *   **Use pointers wisely:** Pointers are a powerful feature of Go, but they can also cause variables to escape to the heap. Be mindful of how you use them.
 
 By understanding the principles of stack and heap allocation and how they apply in your language of choice, you can write more efficient and performant backend services.
+
+For more information on how memory management works at the OS level, check out our article: [A Backend Engineer's Guide to OS Memory Management](./OSMemoryManagement.md)
