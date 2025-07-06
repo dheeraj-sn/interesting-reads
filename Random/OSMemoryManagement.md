@@ -83,4 +83,3 @@ In languages like Java, Python, and Go, garbage collection is an automatic memor
 *   **Java (JVM):** The JVM manages memory automatically using a sophisticated garbage collector. Understanding the different GC algorithms (e.g., G1, ZGC) and tuning the heap size are important for performance.
 *   **Python:** Memory is managed by the Python memory manager, which uses a combination of reference counting and a garbage collector.
 *   **Go:** Go has its own garbage collector designed for low latency. It also provides more control over memory layout with structs and pointers.
-
