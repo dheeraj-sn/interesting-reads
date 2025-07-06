@@ -45,6 +45,50 @@ A variable escapes to the heap if:
 
 You can see the compiler's escape analysis decisions by using the `-gcflags '-m'` flag when building your Go program.
 
+### Go Examples
+
+#### Stack Allocation
+
+```go
+package main
+
+func main() {
+    x := 42
+    y := &x
+    _ = y
+}
+```
+
+In this example, both `x` and `y` are allocated on the stack. The compiler knows that they are only used within the `main` function.
+
+#### Heap Allocation (Escape)
+
+```go
+package main
+
+func createInt() *int {
+    x := 42
+    return &x // &x escapes to the heap
+}
+
+func main() {
+    p := createInt()
+    _ = p
+}
+```
+
+In this case, `x` is allocated on the heap because a pointer to it is returned from the `createInt` function.
+
+### Checking Escape Analysis
+
+You can see the compiler's escape analysis decisions by using the `-gcflags '-m'` flag when building your Go program:
+
+```bash
+go build -gcflags '-m' your_program.go
+```
+
+This will output information about which variables are moved to the heap.
+
 ## Conclusion: A Practical Guide for Engineers
 
 As a backend engineer, understanding the trade-offs between the stack and the heap is essential for writing high-performance code.
